@@ -8,6 +8,9 @@
         <li class="nav-item">
           <%= link_to 'Cerrar Sesión', destroy_user_session_path, method: :delete, class: 'nav-link' %>
         </li>
+        <li class="nav-item">
+          <%= link_to "#{Todo.where(user_id:current_user.id, finished: true).count} tareas listas de un total de #{@tasks.count}", '#', class: 'nav-link active' %>
+        </li>
       <% else %>
         <li class="nav-item">
           <%= link_to 'Iniciar Sesión', new_user_session_path, class: 'nav-link' %>

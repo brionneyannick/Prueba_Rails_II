@@ -6,10 +6,12 @@
         <div class="card-body">
           <h6 class="card-title"><%= task.name %></h5>
           <% if user_signed_in? %>
-              <%= current_user %>
-              <%= link_to 'Realizada', maked_task_path(task.id), class: "btn btn-warning", method: :post %>
-              <%= link_to 'No Realizada', not_maked_task_path(task.id), class: "btn btn-warning", method: :post %>
-          <% end %>
+              
+                <%= link_to 'Deshacer', not_maked_task_path(task.id), class: "btn btn-danger", method: :post %>
+              
+                <%= link_to 'Realizar', maked_task_path(task.id), class: "btn btn-warning", method: :post %>
+              
+            <% end %>
           <%= link_to 'Ver Tarea', task_path(task.id), class: "btn btn-primary" %>
         </div>
       </div>

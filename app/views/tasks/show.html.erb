@@ -1,4 +1,19 @@
-<h4>Detalle de Tarea</h4>
+<h4>Detalle de <%= @task.name %></h4>
 
-<%= @task.name %>
-<%= @task.users.name %>
+<table class="table">
+  <tr>
+    <th>Usuario</th>
+    <th>Estado</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <% if Todo.find_by(user_id: user.id, task_id: params[:id], finished: true) %>
+        <td><%= 'Realizado' %></td>
+      <% else %>
+        <td><%= 'Pendiente' %></td>
+      <% end %>
+
+    </tr>
+  <% end %>
+</table>

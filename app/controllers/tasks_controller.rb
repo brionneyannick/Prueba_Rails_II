@@ -2,18 +2,21 @@ class TasksController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    @todo = Todo.find_by(user_id: current_user.id, task_id: params[:id])
     @tasks = Task.all
   end
 
   def show
     @task = Task.find(params[:id])
+    @todos = Todo.all
+    @users = User.all
+    @tasks = Task.all
   end
 
   def maked
     @previous_todo = Todo.find_by(user_id: current_user.id, task_id: params[:id])
     if @previous_todo.present?
       @previous_todo.update(finished: true)
+      redirect_to root_path, notice: 'Tarea Actualizada'
     else
       @todo = Todo.new()
       @todo.task_id = params[:id]
@@ -31,6 +34,7 @@ class TasksController < ApplicationController
     @previous_todo = Todo.find_by(user_id: current_user.id, task_id: params[:id])
     if @previous_todo.present?
       @previous_todo.update(finished: false)
+      redirect_to root_path, notice: 'Tarea Actualizada'
     else
       @todo = Todo.new()
       @todo.task_id = params[:id]
